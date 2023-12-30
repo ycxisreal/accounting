@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>设定财务目标</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<header>
+  <nav>
+    <ul>
+      <li><a href="transaction.html">收支记录</a></li>
+      <li><a href="scheduledTransaction.html">定期收支</a></li>
+      <li><a href="summary.html">收支摘要</a></li>
+      <li><a href="budget.html">预算添加</a></li>
+      <li><a href="budgetTracking.html">预算跟踪</a></li>
+      <li><a href="trendsAnalysis.html">趋势分析</a></li>
+      <li><a href="financialGoals.html">财务目标</a></li>
+
+    </ul>
+  </nav>
+</header>
+<body>
+
+<section id="financialGoal">
+  <main>
+    <h1>设定财务目标</h1>
+    <form id="goalForm">
+      <input type="text" id="goalName" placeholder="目标名称" required><br>
+      <input type="number" id="targetAmount" placeholder="目标金额" required><br>
+      <input type="date" id="deadline" required><br>
+      <button type="submit">提交目标</button>
+    </form>
+
+    <div id="currentGoalContainer">
+      <h2>当前财务目标</h2>
+      <!-- 在这里动态展示财务目标及其进展 -->
+    </div>
+
+  </main>
+</section>
+
+<script src="/financialGoals.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>财务趋势分析</title>
+    <!-- 可以在这里引入图表库（如 Chart.js）和其他必要的样式文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- 以 Chart.js 为例 -->
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<header>
+    <nav>
+        <ul>
+            <li><a href="summary.html">收支摘要</a></li>
+            <li><a href="trendsAnalysis.html">趋势分析</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+
+<section id="trends">
+    <main>
+
+        <h1>财务趋势分析</h1>
+
+        <label for="timePeriodType">选择时间范围：</label>
+        <select id="timePeriodType" onchange="updateDateSelector()">
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+        </select>
+        <div id="dateSelector"></div>
+        <button onclick="fetchAndDisplayTrends()">分析</button>
+
+        <div id="trendCharts">
+            <h2>收入趋势</h2>
+            <canvas id="incomeTrend"></canvas>
+            <h2>支出趋势</h2>
+            <canvas id="expenseTrend"></canvas>
+        </div>
+    </main>
+</section>
+
+<script src="/trendsAnalysis.js"></script> <!-- 引入您的 JavaScript 文件 -->
+</body>
+</html>

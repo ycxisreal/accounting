@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Financial Summary</title>
+  <link rel="stylesheet" href="/style.css" />
+  <!-- 引入图表库，例如 Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<header>
+  <nav>
+    <ul>
+      <li><a href="summary.html">收支摘要</a></li>
+      <li><a href="trendsAnalysis.html">趋势分析</a></li>
+
+    </ul>
+  </nav>
+</header>
+<body>
+
+<main>
+  <h1>Financial Summary</h1>
+
+  <section id = summary>
+    <div>
+      <label for="timePeriodType">Select Time Period Type:</label>
+      <select id="timePeriodType" onchange="updateDateSelector()">
+        <option value="daily">Daily</option>
+        <option value="monthly">Monthly</option>
+        <option value="yearly">Yearly</option>
+      </select>
+    </div>
+    <div id="dateSelector"></div>
+    <button onclick="loadSummary()">Load Summary</button>
+    <div>
+      <canvas id="summaryChart" height="500" width="1000"></canvas>
+    </div>
+    <div>
+      <canvas id="incomePieChart"></canvas>
+    </div>
+    <div>
+      <canvas id="expensePieChart"></canvas>
+    </div>
+  </section>
+</main>
+
+
+<script src="/summary.js"></script>
+</body>
+</html>
