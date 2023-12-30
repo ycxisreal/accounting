@@ -11,24 +11,27 @@
 
             <!-- 右侧表单 -->
             <div class="right-section">
-                <el-form ref="loginForm" label-width="80px">
-                    <div id="touxiang">
-                        <el-avatar> user </el-avatar>
-                    </div>
-                    <br>
-                    <el-form-item label="姓名" prop="username">
-                        <el-input v-model="username" placeholder="请输入姓名"></el-input>
-                    </el-form-item>
+                <el-card class="border-card" shadow="hover">
+                    <el-form ref="loginForm" label-width="80px">
+                        <div id="touxiang">
+                            <el-avatar> user </el-avatar>
+                        </div>
+                        <br>
+                        <el-form-item label="姓名" prop="username">
+                            <el-input v-model="username" placeholder="请输入姓名"></el-input>
+                        </el-form-item>
 
-                    <el-form-item label="密码" prop="password">
-                        <el-input type="password" v-model="passwordHash" placeholder="请输入密码"></el-input>
-                    </el-form-item>
+                        <el-form-item label="密码" prop="password">
+                            <el-input type="password" v-model="passwordHash" placeholder="请输入密码"></el-input>
+                        </el-form-item>
 
-                    <el-form-item>
-                        <el-button type="primary" @click="login">登录</el-button>
-                        <el-button @click="register">注册</el-button>
-                    </el-form-item>
-                </el-form>
+                        <el-form-item>
+                            <el-button type="primary" @click="login">登录</el-button>
+                            <el-button @click="register">注册</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-card>
+
             </div>
         </div>
     </div>

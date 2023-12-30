@@ -28,10 +28,8 @@
 
                 <el-form-item label="时间单位" prop="timeUnit">
                     <el-radio-group v-model="form.timeUnit">
-                        <el-radio label="day">每天</el-radio>
-                        <el-radio label="week">每周</el-radio>
-                        <el-radio label="month">每月</el-radio>
-                        <el-radio label="year">每年</el-radio>
+                        <el-radio label="monthly">每月</el-radio>
+                        <el-radio label="yearly">每年</el-radio>
                     </el-radio-group>
                 </el-form-item>
 
@@ -51,13 +49,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { ElCard, ElForm, ElFormItem, ElSelect, ElOption, ElInputNumber, ElRadio, ElRadioGroup, ElDatePicker, ElInput, ElButton } from 'element-plus'
 
 const form = ref({
     categoryId: '',
     amount: 0,
-    timeUnit: 'day',
+    timeUnit: 'yearly',
     startDate: '',
     endDate: '',
 })
@@ -67,11 +65,59 @@ const rules = ref({
     amount: [{ required: true, message: '请输入数量', trigger: 'blur' }],
     timeUnit: [{ required: true, message: '请选择时间单位', trigger: 'blur' }],
     startDate: [{ required: true, message: '请选择初始日期', trigger: 'blur' }],
-    endDate: [{ required: true, message: '请选择截止日期', trigger: 'blur' }]
+    endDate: [{ required: false, message: '请选择截止日期', trigger: 'blur' }]
 })
 
+const calculateEndDate = () => {
+    if (!form.value.startDate || !form.value.timeUnit) {
+        return;
+    }
+
+    const startDate = new Date(form.value.startDate);
+    switch (form.value.timeUnit) {
+        case 'monthly':
+            startDate.setMonth(startDate.getMonth() + 1);
+            break;
+        case 'yearly':
+            startDate.setFullYear(startDate.getFullYear() + 1);
+            break;
+    }
+    form.value.endDate = startDate.toISOString().split('T')[0];
+}
+
+// 监听时间单位和初始日期的变化
+watch(() => [form.value.startDate, form.value.timeUnit], calculateEndDate);
+
 const submitForm = () => {
-    // 提交表单逻辑
+    const userId = sessionStorage.getItem('userId'); // 获取用户ID
+    const budgetData = {
+        userId: userId,
+        categoryId: form.value.categoryId,
+        amount: form.value.amount,
+        budgetPeriod: form.value.timeUnit,
+        startDate: form.value.startDate,
+        endDate: form.value.endDate
+    };
+    // 发送 POST 请求
+    fetch('http://localhost:8080/api/budgets/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(budgetData)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then(data => {
+            alert('Success');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 </script>
 

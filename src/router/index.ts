@@ -9,7 +9,9 @@ import iomanage from '@/components/iomanage.vue'
 import budget from '@/components/budget.vue'
 import budgetTrack from '@/components/BudgetTracking.vue'
 import financialGoals from '@/components/financialGoals.vue'
-
+import test from '@/components/test.vue'
+import summary from '@/components/summary.vue'
+import trendsAnalysisVue from '@/components/trendsAnalysis.vue'
 // import trendsAnalysisVue from '@/components/trendsAnalysis.vue'
 // import FSummaryVue from '@/components/FSummary.vue'
 const router = createRouter({
@@ -27,13 +29,6 @@ const router = createRouter({
                 rootview: signup
             }
         },
-        // {
-        //     path: '/home/submission',
-        //     components: {
-        //         rootview: home,
-        //         homeview: su
-        //     }
-        // },
         {
             path: '/home',
             components: {
@@ -65,9 +60,9 @@ const router = createRouter({
                     }
                 },
                 {
-                    path: 'budgetTracking',
+                    path: 'summary',
                     components: {
-                        homeview: budgetTrack
+                        homeview: summary
                     }
                 },
                 {
@@ -75,19 +70,25 @@ const router = createRouter({
                     components: {
                         homeview: financialGoals
                     }
+                },
+                {
+                    path: 'test',
+                    components: {
+                        homeview: test
+                    }
+                },
+                {
+                    path: 'budgetTracking',
+                    components: {
+                        homeview: budgetTrack
+                    }
+                },
+                {
+                    path: 'trends',
+                    components: {
+                        homeview: trendsAnalysisVue
+                    }
                 }
-                // {
-                //     path: 'trendsAnalysis',
-                //     components: {
-                //         homeview: trendsAnalysisVue
-                //     }
-                // },
-                // {
-                //     path: 'FSummary',
-                //     components: {
-                //         homeview: FSummaryVue
-                //     }
-                // }
             ]
         }
     ]

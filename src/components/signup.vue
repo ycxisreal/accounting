@@ -10,13 +10,13 @@
             <div class="divider"></div>
 
             <div class="signup-container">
+                <div class="progress">
+                    <el-progress class="pro" :text-inside="false" :stroke-width="10" :percentage="progress" striped
+                        striped-flow />
+                </div>
                 <el-card class="border-card" shadow="hover">
                     <div id="touxiang">
                         <el-avatar> user </el-avatar>
-                    </div>
-                    <div class="progress">
-                        <el-progress class="pro" :text-inside="false" :stroke-width="10" :percentage="70" striped
-                            striped-flow />
                     </div>
                     <el-form ref="signupForm" class="signup-form" label-width="80px">
                         <el-form-item label="姓名" prop="username">
@@ -33,6 +33,7 @@
 
                         <el-form-item>
                             <el-button type="primary" @click="handleSignup">注册</el-button>
+                            <el-button type="info" @click="back">返回</el-button>
                         </el-form-item>
                     </el-form>
                 </el-card>
@@ -42,14 +43,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { ElForm, ElFormItem, ElInput, ElButton } from 'element-plus'
 import { useRouter } from 'vue-router'
 let username = ref('')
 let passwordHash = ref('')
 let email = ref('')
+let progress = ref(0)
 
 const router = useRouter()
+const back = () => {
+    router.push('/')
+}
 const handleSignup = () => {
     // 这里可以添加注册逻辑，例如发起注册请求
     // 如果注册成功，可以跳转到登录页面或其他页面
@@ -70,6 +75,20 @@ const handleSignup = () => {
         .catch(error => console.error('Error:', error));
 
 }
+const updateProgress = () => {
+    let completedFields = 0;
+    if (username.value) completedFields++;
+    if (passwordHash.value) completedFields++;
+    if (email.value) completedFields++;
+
+    progress.value = Math.round((completedFields / 3) * 100);
+}
+
+// 监听表单项变化
+watch(username, updateProgress);
+watch(passwordHash, updateProgress);
+watch(email, updateProgress);
+
 
 </script>
 
@@ -110,16 +129,21 @@ const handleSignup = () => {
 }
 
 .progress {
+    display: flex;
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
     margin-bottom: 10px;
     width: 100%;
 }
 
 .pro {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 55%;
+    /* 设置进度条宽度，可根据需求调整 */
+    /* 其他样式保持不变 */
 }
+
 
 .divider {
     height: 100%;

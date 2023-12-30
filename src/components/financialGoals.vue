@@ -24,7 +24,6 @@ let targetDate = ref(null)
 
 function submitGoal() {
     const userId = sessionStorage.getItem('userId'); // 或其他方式获取用户ID
-
     fetch('http://localhost:8080/api/financialGoals/add', {
         method: 'POST',
         headers: {
