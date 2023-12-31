@@ -49,19 +49,23 @@
                                 </template>
                                 <el-menu-item-group title="Group">
                                     <el-menu-item index="2-1" @click="changeRoute(4)">收支类别管理</el-menu-item>
-                                    <el-menu-item index="2-2" @click="changeRoute(5)">item two</el-menu-item>
+                                    <el-menu-item index="2-2" @click="changeRoute(5)">财务目标</el-menu-item>
                                 </el-menu-item-group>
-                                <el-menu-item-group title="Group">
-                                    <el-menu-item index="2-3" @click="changeRoute(6)">item one</el-menu-item>
-                                    <el-menu-item index="2-4" @click="changeRoute(7)">item two</el-menu-item>
-                                    <el-menu-item index="2-5" @click="changeRoute(8)">item three</el-menu-item>
-                                </el-menu-item-group>
+                                <!-- <el-menu-item-group title="Group">
+                                    <el-menu-item index="2-3" @click="changeRoute(5)">item one</el-menu-item>
+                                    <el-menu-item index="2-4" @click="changeRoute(5)">item two</el-menu-item>
+                                    <el-menu-item index="2-5" @click="changeRoute(5)">item three</el-menu-item>
+                                </el-menu-item-group> -->
                             </el-sub-menu>
                             <el-sub-menu index="3">
                                 <template #title>
                                     <el-icon><icon-menu /></el-icon>
                                     <span>可视化数据统计</span>
                                 </template>
+                                <el-menu-item-group title="Group">
+                                    <el-menu-item index="3-1" @click="changeRoute(6)">收支摘要报告</el-menu-item>
+                                    <el-menu-item index="3-2" @click="changeRoute(7)">收支趋势分析</el-menu-item>
+                                </el-menu-item-group>
                             </el-sub-menu>
                             <el-menu-item index="4">
                                 <el-icon>
@@ -147,16 +151,15 @@ function changeRoute(value: number) {
             break
         }
         case 5: {
-            routePath = '   '
+            routePath = '/home/test'
             break
         }
         case 6: {
-            window.location.href = '/summary.html';
-            // routePath = '/home/FSummary'
+            routePath = '/home/summary'
             break
         }
         case 7: {
-            routePath = '/home/summary'
+            routePath = '/home/trends'
             break
         }
         case 8: {

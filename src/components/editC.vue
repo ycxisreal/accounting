@@ -93,7 +93,7 @@ const fetchData = async () => {
                 name: category.categoryName,
                 type: category.categoryType
             }));
-            alert('数据更新');
+            // alert('数据更新');
         })
         .catch(error => {
             console.error('Error:', error);

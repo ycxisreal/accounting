@@ -1,19 +1,20 @@
-<template>
-    <h1>Financial Summary</h1>
-    <section id="summary">
-        <div>
-            <label for="timePeriodType">Select Time Period Type:</label>
-            <el-select v-model="timePeriodType" placeholder="Select" @change="updateDateSelector">
-                <el-option label="Daily" value="daily"></el-option>
-                <el-option label="Monthly" value="monthly"></el-option>
-                <el-option label="Yearly" value="yearly"></el-option>
-            </el-select>
-        </div>
-        <div v-if="timePeriodType">
-            <el-date-picker v-model="selectedDate" :type="datePickerType" :value-format="dateFormat" :format="dateFormat"
-                placeholder="Choose date"></el-date-picker>
-        </div>
-        <el-button type="primary" @click="loadSummary">Load Summary</el-button>
+<!-- <template>
+    <el-header>
+        <h1>Financial Summary</h1>
+            <div>
+                <label for="timePeriodType">Select Time Period Type:</label>
+                <el-select v-model="timePeriodType" placeholder="Select" @change="updateDateSelector">
+                    <el-option label="Daily" value="daily"></el-option>
+                    <el-option label="Monthly" value="monthly"></el-option>
+                    <el-option label="Yearly" value="yearly"></el-option>
+                </el-select>
+            </div>
+            <div v-if="timePeriodType">
+                <el-date-picker v-model="selectedDate" :type="datePickerType" :value-format="dateFormat" :format="dateFormat"
+                    placeholder="Choose date"></el-date-picker>
+            </div>
+            <el-button type="primary" @click="loadSummary">Load Summary</el-button>
+    </el-header>
         <div>
             <canvas ref="summaryChart"></canvas>
         </div>
@@ -23,7 +24,42 @@
         <div>
             <canvas ref="expensePieChart"></canvas>
         </div>
-    </section>
+</template> -->
+<template>
+    <div class="container">
+        <div class="header">
+            <h1>Financial Summary</h1>
+            <div class="controls">
+                <div>
+                    <label for="timePeriodType">Select Time Period Type:</label>
+                    <el-select v-model="timePeriodType" placeholder="Select" @change="updateDateSelector">
+                        <el-option label="Daily" value="daily"></el-option>
+                        <el-option label="Monthly" value="monthly"></el-option>
+                        <el-option label="Yearly" value="yearly"></el-option>
+                    </el-select>
+                </div>
+                <div v-if="timePeriodType">
+                    <el-date-picker v-model="selectedDate" :type="datePickerType" :value-format="dateFormat"
+                        :format="dateFormat" placeholder="Choose date"></el-date-picker>
+                </div>
+                <el-button type="primary" @click="loadSummary">Load Summary</el-button>
+            </div>
+        </div>
+
+        <div class="charts">
+            <div class="chart bar-chart">
+                <canvas ref="summaryChart"></canvas>
+            </div>
+            <div class="pie-charts">
+                <div class="chart">
+                    <canvas ref="incomePieChart"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas ref="expensePieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -293,94 +329,52 @@ watch(timePeriodType, (newValue) => {
 </script>
 
 <style scoped>
-/* ...你的CSS样式... */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #a0cfff;
-    justify-content: center;
+.container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
-
+    width: 100%;
 }
 
-header {
-    background-color: #79bbff;
-    color: white;
+.header {
     text-align: center;
-    padding: 1em 0;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-section {
-    margin: 20px auto;
-    /* 水平居中 */
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
     width: 80%;
-    /* 或者您可以指定一个固定的宽度，例如 600px */
-    max-width: 600px;
-    /* 限制最大宽度 */
+    /* 标题和控制区的宽度 */
 }
 
-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-main {
-    text-align: center;
-    padding: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="number"],
-input[type="email"],
-input[type="date"],
-select {
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+    /* 控制元素宽度*/
 }
 
-button {
+.charts {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
     width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: rgb(64, 158, 255);
-    color: white;
-    cursor: pointer;
+    /* 图表区域宽度 */
 }
 
-button:hover {
-    background-color: rgb(121, 187, 255);
+.bar-chart {
+    flex: 1;
+}
+
+.pie-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 25%;
+    /* 饼图容器宽度*/
+}
+
+.chart {
+    width: 100%;
+    /* 图表宽度 */
 }
 </style>
